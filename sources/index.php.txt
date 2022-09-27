@@ -1,0 +1,19 @@
+<?php
+	session_start();
+	$flag = "ISPCTF{XXXX_XXXX_XXXX_XXXX}";
+	$_SESSION['passwd'] = base64_encode($_COOKIE["PHPSESSID"]);
+	$logged = 0;
+	if(isset($_POST['login'])){
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		if(str_rot13($username)=="VFCPyho"&&MD5(base64_decode($_SESSION['passwd']))==hex2bin($password)){
+			$logged=1;
+		}
+		if(isset($logged))
+			if($logged==1)
+				echo "<script>alert($flag)</script>";
+			else
+				echo "<script>alert('username or password is wrong')</script>";
+	}
+
+?>
